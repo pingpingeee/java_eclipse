@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 
 <%
+	// 쿠키를 담을 배열객체 생성
 	Cookie[] cookies = request.getCookies();
 	
 	for(int i=0;i< cookies.length; i++){
