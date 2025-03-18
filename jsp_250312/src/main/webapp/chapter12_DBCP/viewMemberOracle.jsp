@@ -20,9 +20,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%
+<%
 	request.setCharacterEncoding("UTF-8");
-	%>
+%>
 	<table width="400" border="1">
 		<tr>
 			<td>아이디</td>
@@ -42,15 +42,21 @@
 		%>
 		<tr>
 			<%-- <td><%=rs.getString("id")%></td> --%>
-
+			
 			<td>
-				<!-- 데이터 넘기는 방법  --> <!-- 1번을 실무에서 많이 사용 : 수정(클릭하는 시점을 반영) --> <!-- 1. 해당키(ex>아이디)만 넘길 때  -->
-				<!-- 아이디를 가지고 가서 조회 --> <!-- select~ where id=? --> <!-- 2. 모든 데이터 넘길 때  -->
-				<!-- ?id= &name= &tel= --> <a
-				href="updateMemeberOracle.jsp?id=<%=rs.getString("id")%>"> <%=rs.getString("id")%>
+<!-- 데이터 넘기는 방법  -->
+<!-- 1번을 실무에서 많이 사용 : 수정(클릭하는 시점을 반영) -->
+<!-- 1. 해당키(ex>아이디)만 넘길 때  -->
+<!-- 아이디를 가지고 가서 조회 -->
+<!-- select~ where id=? -->
+			
+<!-- 2. 모든 데이터 넘길 때  -->
+<!-- ?id= &name= &tel= -->
+			<a href="updateMemeberOracle.jsp?id=<%=rs.getString("id")%>">
+			<%=rs.getString("id")%>
 			</a>
 			</td>
-
+			
 			<td><%=rs.getString("name")%></td>
 			<!--  <td><%=rs.getInt("class")%></td>-->
 			<td>
