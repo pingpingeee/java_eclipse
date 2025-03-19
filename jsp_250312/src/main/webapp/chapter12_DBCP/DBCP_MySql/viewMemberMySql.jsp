@@ -43,7 +43,7 @@
 		<tr>
 			
 			<td>
-			<a href="updateMemeberSql.jsp?id=<%=rs.getString("id")%>">
+			<a href="updateMemeberMySql.jsp?id=<%=rs.getString("id")%>">
 			<%=rs.getString("id")%>
 			</a>
 			</td>
