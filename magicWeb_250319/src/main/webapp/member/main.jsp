@@ -45,8 +45,8 @@
 			<td colsapn="2" align="center">
 				<input type="button" value="로그아웃" onclick="location='logout.jsp'">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<input type="button" value="회원정보변경">
-			</td>
+				<input type="button" value="회원정보변경" onclick="location='memberUpdate.jsp'">
+			</td> 
 		</tr>
 	</table>
 	<%
