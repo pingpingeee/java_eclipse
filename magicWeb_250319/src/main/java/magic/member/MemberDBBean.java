@@ -181,4 +181,43 @@ public class MemberDBBean {
 		}
 		return member;
 	}
+	
+	// 사용자 정보수정
+	public int userUpdate(String id, String pwd, String email) throws Exception {
+		PreparedStatement pstmt = null;
+		Connection conn = null;
+		ResultSet rs = null;
+		int re = -1;
+		
+		String sql = "update memberT set mem_pwd=?, mem_email=? where mem_uid=?";
+				
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, email);
+			pstmt.setString(3, id);
+
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				re = 1;
+			} else { // 중복되는 값 없을 때
+				re = -1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return re;
+	}
+	
 }
