@@ -73,6 +73,17 @@
 	} catch (SQLException e) {
 		out.print("데이터베이스 연결 실패");
 		out.print(e.getMessage());
+	} finally {
+		try {
+			if (conn != null)
+				conn.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (rs != null)
+				rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	%>
 </body>
