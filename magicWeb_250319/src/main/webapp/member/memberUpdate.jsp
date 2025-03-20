@@ -49,7 +49,7 @@
 			</tr>
 			<tr>
 				<td>주 소</td>
-				<td><%=mb.getMem_addr() %></td>
+				<td><input type="text" size="30" name="mem_addr" value="<%=mb.getMem_addr()%>">*</td>
 			</tr>
 			<tr>
 				<td colspan="3" align="center">
