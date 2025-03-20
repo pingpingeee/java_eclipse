@@ -35,7 +35,7 @@
 			%>
 			<script>
 				alert("회원정보가 수정되었습니다.");
-				history.back();
+				location.href="main.jsp";
 			</script>
 			<%
 			// response.sendRedirect("main.jsp");
