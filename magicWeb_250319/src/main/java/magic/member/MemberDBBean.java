@@ -200,7 +200,6 @@ public class MemberDBBean {
 			pstmt.setString(4, member.getMem_uid());
 
 			rs = pstmt.executeQuery();
-			System.out.println("변경 성공");
 			if(rs.next()) {
 				re = 1;
 			} else { // 중복되는 값 없을 때
@@ -208,7 +207,6 @@ public class MemberDBBean {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("변경 실패");
 		} finally {
 			try {
 				if (pstmt != null)
