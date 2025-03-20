@@ -183,23 +183,24 @@ public class MemberDBBean {
 	}
 	
 	// 사용자 정보수정
-	public int userUpdate(String id, String pwd, String email) throws Exception {
+	public int updateMember(MemberBean member) throws Exception {
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
 		int re = -1;
 		
-		String sql = "update memberT set mem_pwd=?, mem_email=? where mem_uid=?";
+		String sql = "update memberT set mem_pwd=?, mem_email=?, mem_address=? where mem_uid=?";
 				
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, pwd);
-			pstmt.setString(2, email);
-			pstmt.setString(3, id);
+			pstmt.setString(1, member.getMem_pwd());
+			pstmt.setString(2, member.getMem_email());
+			pstmt.setString(3, member.getMem_addr());
+			pstmt.setString(4, member.getMem_uid());
 
 			rs = pstmt.executeQuery();
-			
+			System.out.println("변경 성공");
 			if(rs.next()) {
 				re = 1;
 			} else { // 중복되는 값 없을 때
@@ -207,6 +208,7 @@ public class MemberDBBean {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("변경 실패");
 		} finally {
 			try {
 				if (pstmt != null)
