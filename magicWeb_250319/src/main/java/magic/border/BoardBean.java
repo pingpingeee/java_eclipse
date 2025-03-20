@@ -1,10 +1,30 @@
 package magic.border;
 
+import java.sql.Timestamp;
+
 public class BoardBean {
+	private int b_id;
+
 	private String b_name;
 	private String b_email;
 	private String b_title;
 	private String b_content;
+	private Timestamp b_date;
+	
+	
+	
+	public Timestamp getB_date() {
+		return b_date;
+	}
+	public void setB_date(Timestamp b_date) {
+		this.b_date = b_date;
+	}
+	public int getB_id() {
+		return b_id;
+	}
+	public void setB_id(int b_id) {
+		this.b_id = b_id;
+	}
 	
 	public String getB_name() {
 		return b_name;
