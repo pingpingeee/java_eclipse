@@ -10,12 +10,14 @@
 <body>
 <%
 	String s_uid = (String)session.getAttribute("uid");
-	String pwd = request.getParameter("mem_pwd");
-	String email = request.getParameter("mem_email");
+	
 	MemberDBBean manager = MemberDBBean.getInstance();
 
-	int check = manager.userUpdate(s_uid, pwd, email);
 	MemberBean mb = manager.getMember(s_uid);
+	mb.setMem_pwd(request.getParameter("mem_pwd"));
+	mb.setMem_email(request.getParameter("mem_pwd"));
+	mb.setMem_addr(request.getParameter("mem_addr"));
+	int check = manager.updateMember(mb);
 	
 	
 	
