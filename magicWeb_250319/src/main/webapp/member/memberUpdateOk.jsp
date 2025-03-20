@@ -2,6 +2,8 @@
 <%@page import="magic.member.MemberDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!--<jsp:useBean class="magic.member.MemberBean" id="member"></jsp:useBean>
+<jsp:setProperty property="*" name="member"/>-->
 <html>
 <head>
 <meta charset="UTF-8">
