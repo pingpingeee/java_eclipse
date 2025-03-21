@@ -13,9 +13,9 @@
 <%
     // 게시글 리스트 가져오기
     BoardDBBean manager = BoardDBBean.getInstance();
-	int b_id = Integer.parseInt((String) request.getParameter("b_id"));
-    BoardBean board = manager.getBoard(b_id);
-    
+	String id = request.getParameter("b_id");
+	int b_id = Integer.parseInt(id);
+    BoardBean board = manager.getBoard(b_id, true);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:dd");
 %>
 
@@ -26,6 +26,10 @@
             <td width="100">글번호</td>
             <td width="200">
             <%= board.getB_id()%>
+            </td>
+            <td width="100">조회수</td>
+            <td width="200">
+            <%= board.getB_hit()%>
             </td>
         </tr>
         <tr height="30" align="center">
@@ -50,6 +54,17 @@
             <%= board.getB_content()%>
             </td>
         </tr>
+        <tr height="30" align="center">
+				<td align="right" colspan="4">
+					<input type="button" value="글수정"
+					 onclick="location.href='edit.jsp?b_id=<%= board.getB_id() %>'">
+					<input type="button" value="글삭제"
+					 onclick="location.href='delete.jsp?b_id=<%= board.getB_id() %>'">
+					<input type="button" value="답변글"
+					 onclick="location.href='write.jsp?b_id=<%= board.getB_id() %>'">
+					<input type="button" value="글목록" onclick="location='list.jsp'"> 
+				</td>
+			</tr>
     </table>
 </center>
 </body>

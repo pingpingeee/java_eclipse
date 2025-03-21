@@ -16,7 +16,8 @@
     BoardDBBean manager = BoardDBBean.getInstance();
     ArrayList<BoardBean> boardList = manager.listBoard();
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    
+    int b_level = 0;
+
 %>
 
 <center>
@@ -36,6 +37,7 @@
             <th width="450">글제목</th>
             <th width="120">작성자</th>
             <th width="220">작성일</th>
+            <th width="120">조회수</th>
         </tr>
 
         <% 
@@ -63,10 +65,21 @@
             </td>  
             <!-- 글 제목 --> 
             <td align="left">
-<%--             <a href="show.jsp?b_id=<%= board.getB_id() %>"> --%>
-            <a href="show.jsp?b_id=<%= board.getB_id() %>">
-            <%= board.getB_title() %>
-            </a>
+            	<%
+            		if(b_level > 0){
+            			for(int i = 0; i < b_level; i++){
+            				%>
+            					&nbsp;
+            				<%
+            			}
+            			%>
+            				<img src="./images/AnswerLine.gif" width="16" height="16">
+            			<%
+            		}
+            	%>
+	            <a href="show.jsp?b_id=<%= board.getB_id() %>">
+            		<%= board.getB_title() %>
+            	</a>
 			</td>
 			<!-- 작성자 -->
             <td>
@@ -75,8 +88,11 @@
 	            </a>
             </td> 
             <td>
-<%-- 	            <%= board.getB_date() %> --%>
 				<%= sdf.format(board.getB_date()) %>
+	            </a>
+            </td> 
+            <td>
+				<%= board.getB_hit() %>
 	            </a>
             </td> 
         </tr>
