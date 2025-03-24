@@ -1,4 +1,4 @@
-package magic.border;
+package magic.board;
 
 import java.sql.Timestamp;
 
@@ -8,14 +8,46 @@ public class BoardBean {
 	private String b_email;
 	private String b_title;
 	private String b_content;
+	private String b_pwd;
 	private Timestamp b_date;
 	private int b_hit;
-	private String b_pwd;
 	private String b_ip;
-	private int b_ref = 0;
-	private int b_step = 0;
-	private int b_level = 0;
+	private int b_ref=0;
+	private int b_step=0;
+	private int b_level=0;
 	
+	public static int pageSize=10;//한 페이지당 10개 출력물
+	public static int pageCount=1;//페이지 개수 지정 변수
+	public static int pageNum=1;//페이지 번호
+	
+//	limit : 화면에 표시되는 페이지 최대갯수
+	public static String pageNumber(int limit) {
+		String str="";
+		int temp=(pageNum-1) % limit;
+		int startPage=pageNum - temp;
+		
+		//[이전] 출력
+		if ((startPage - limit) > 0) {
+			str = "<a href='list.jsp?pageNum="+(startPage-1)+"'>[이전]</a>&nbsp;&nbsp;";
+		}
+		
+		//페이지 번호 나열하기
+		for (int i = startPage; i < (startPage+limit); i++) {
+			if (i == pageNum) {
+				str += "["+i+"]&nbsp;&nbsp;";
+			} else {
+				str += "<a href='list.jsp?pageNum="+i+"'>"+"["+i+"]</a>&nbsp;&nbsp;";
+			}
+			if (i >= pageCount) break;
+		}
+		
+		//[다음] 출력
+		if ((startPage + limit) <= pageCount) {
+			str += "<a href='list.jsp?pageNum="+(startPage+limit)+"'>[다음]</a>";
+		}
+		
+		return str;
+	}
 	
 	public int getB_ref() {
 		return b_ref;
@@ -41,17 +73,17 @@ public class BoardBean {
 	public void setB_ip(String b_ip) {
 		this.b_ip = b_ip;
 	}
-	public int getB_hit() {
-		return b_hit;
-	}
-	public void setB_hit(int b_hit) {
-		this.b_hit = b_hit;
-	}
 	public String getB_pwd() {
 		return b_pwd;
 	}
 	public void setB_pwd(String b_pwd) {
 		this.b_pwd = b_pwd;
+	}
+	public int getB_hit() {
+		return b_hit;
+	}
+	public void setB_hit(int b_hit) {
+		this.b_hit = b_hit;
 	}
 	public Timestamp getB_date() {
 		return b_date;
@@ -65,7 +97,6 @@ public class BoardBean {
 	public void setB_id(int b_id) {
 		this.b_id = b_id;
 	}
-	
 	public String getB_name() {
 		return b_name;
 	}
@@ -90,5 +121,5 @@ public class BoardBean {
 	public void setB_content(String b_content) {
 		this.b_content = b_content;
 	}
-
+	
 }

@@ -1,5 +1,6 @@
 package magic.member;
 
+//회원정보 빈 객체
 public class MemberBean {
 	private String mem_uid;
 	private String mem_pwd;
@@ -37,4 +38,5 @@ public class MemberBean {
 	public void setMem_addr(String mem_addr) {
 		this.mem_addr = mem_addr;
 	}
+	
 }

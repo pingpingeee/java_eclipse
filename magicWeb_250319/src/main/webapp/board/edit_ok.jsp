@@ -1,30 +1,46 @@
-<%@page import="magic.border.BoardDBBean"%>
+<%@page import="magic.board.BoardDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:useBean class="magic.border.BoardBean" id="board"></jsp:useBean>
+<%
+	request.setCharacterEncoding("UTF-8");
+%>
+<jsp:useBean class="magic.board.BoardBean" id="board"></jsp:useBean>
 <jsp:setProperty property="*" name="board"/>
-<% 
-	int id = Integer.parseInt(request.getParameter("b_id"));
-// 	String pw = request.getParameter("b_pwd");
-// 	String title = request.getParameter("b_title");
-// 	String content = request.getParameter("b_content");
-	//int re = manager.editBoard(id, pw, title, content);
-	BoardDBBean manager = BoardDBBean.getInstance();
-	int re = manager.editBoard(board);
+<%
+	String pageNum = request.getParameter("pageNum");
+
+	int b_id = Integer.parseInt(request.getParameter("b_id"));
+//	String b_pwd = request.getParameter("b_pwd");
 	
-	if(re==1) {
-		%> 
+	BoardDBBean db = BoardDBBean.getInstance();
+	//int re = db.deleteBoard(b_id, b_pwd);
+	int re = db.editBoard(board);
+
+	if(re == 1){
+		//비밀번호 일치로 글목록 이동
+//		response.sendRedirect("list.jsp");
+		response.sendRedirect("list.jsp?pageNum="+pageNum);
+	}else if(re == 0){
+		//비밀번호 틀림
+%>
 		<script>
-		alert("수정완료");
-		location.href="list.jsp";
+			alert("비밀번호가 맞지 않습니다.");
+			history.go(-1);
 		</script>
-		<%
-	} else {
-		%> 
+<%
+	}else if(re == -1){
+		//수정 실패
+%>
 		<script>
-		alert("비밀번호가 다릅니다.");
-		history.back();
+			alert("수정에 실패하였습니다.");
+			history.go(-1);
 		</script>
-		<%
+<%
 	}
 %>
+
+
+
+
+
+

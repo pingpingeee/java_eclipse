@@ -1,18 +1,24 @@
-<%@page import="magic.border.BoardBean"%>
-<%@page import="magic.border.BoardDBBean"%>
+<%@page import="magic.board.BoardBean"%>
+<%@page import="magic.board.BoardDBBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%
-	int b_id = 0, b_ref = 1, b_step = 0 , b_level = 0;
-	String b_title = "";
-	if(request.getParameter("b_id") != null){ // 답변글(show.jsp에서 글번호를 가지고 옴)
+	request.setCharacterEncoding("UTF-8");
+%>
+<%
+	String pageNum = request.getParameter("pageNum");
+
+	int b_id=0, b_ref=1, b_step=0, b_level=0;
+	String b_title="";
+
+	if(request.getParameter("b_id") != null){//답변글(show.jsp 에서 글번호를 가지고 옴)
 		b_id = Integer.parseInt(request.getParameter("b_id"));
 	}
 	
-	BoardDBBean manager = BoardDBBean.getInstance();
-	BoardBean board = manager.getBoard(b_id, false);
+	BoardDBBean db = BoardDBBean.getInstance();
+	BoardBean board = db.getBoard(b_id, false);
 	
-	if(board != null){ // 답변글
+	if(board != null){//답변글
 		b_ref = board.getB_ref();
 		b_step = board.getB_step();
 		b_level = board.getB_level();
@@ -23,13 +29,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<script src="board.js" type="text/javascript"></script>
 </head>
-<script src="board.js" type="text/javascript"></script>
 <body>
-<%request.setCharacterEncoding("UTF-8");%>
 	<center>
 		<h1>글 올 리 기</h1>
-		<form method="post" action="write_ok.jsp" name="reg_frm">
+		<form name="reg_frm" method="post" action="write_ok.jsp">
 			<input type="hidden" name="b_id" value="<%= b_id %>">
 			<input type="hidden" name="b_ref" value="<%= b_ref %>">
 			<input type="hidden" name="b_step" value="<%= b_step %>">
@@ -38,47 +43,56 @@
 				<tr height="30">
 					<td width="80">작성자</td>
 					<td width="140">
-					<input type="text" size="10" name="b_name" maxlength="20"></td>
+					<!-- 					maxlength : 화면단에서 데이터베이스 오류를 미리 방지 -->
+						<input type="text" name="b_name" size="10" maxlength="20">
+					</td>
 					<td width="80">이메일</td>
-					<td width="140">
-					<input type="text" size="24" name="b_email" maxlength="50"></td>
+					<td width="240">
+					<!-- 					maxlength : 화면단에서 데이터베이스 오류를 미리 방지 -->
+						<input type="text" name="b_email" size="24" maxlength="50">
+					</td>
 				</tr>
 				<tr height="30">
 					<td width="80">글제목</td>
-					<td width="460" colspan="3">
-					<%
-						if(b_id == 0){ // 신규글
-							%>
-								<input type="text" size="55"
-									name="b_title" maxlength="80"></td>
-							<%
-						} else { // 답변글
-							%>
-								<input type="text" size="55"
-									name="b_title" maxlength="80" value="[답변]:<%= b_title %>"></td>
-							<%
-						}
-					%>
-				</tr>
-				<tr height="30">
-					<td width="460" colspan="4">
-					<textarea rows="10" cols="65" name="b_content"></textarea>
+					<td colspan="3" width="460">
+						<%
+//							[답변]: 의 존재여부
+							if(b_id == 0){//신규글
+								%>
+								<input type="text" name="b_title" size="55" maxlength="80">
+								<%
+							}else{//답변글
+								%>
+								<input type="text" name="b_title" size="55" maxlength="80" 
+									   value="[답변]:<%= b_title %>">
+								<%
+							}
+						%>
 					</td>
 				</tr>
-				<tr height="30">
-					<td width="80">암호</td>
-					<td width="140">
-					<input type="password" name="b_pwd" size="10" maxlength="12">
-					</td>
-				</tr>
-				<tr height="50" align="right">
+				<tr>
 					<td colspan="4">
-						<input type="button" value="글쓰기" onclick="check_ok()">
+						<textarea rows="10" cols="65" name="b_content"></textarea>
+					</td>
+				</tr>
+				<tr height="30">
+					<td width="80">암&nbsp;&nbsp;호</td>
+					<td colspan="3" width="460">
+						<input type="text" name="b_pwd" size="12" maxlength="12">
+					</td>
+				</tr>
+				<tr height="50" align="center">
+					<td colspan="4">
+						<input type="button" value="글쓰기" onclick="check_ok()">&nbsp;
+					<%--
+						<input type="submit" value="글쓰기">&nbsp;
+						 --%>
 						<input type="reset" value="다시작성">
-						<input type="button" value="글목록" onclick="location='list.jsp'">
+						<input type="button" value="글목록" onclick="location.href='list.jsp?pageNum=<%= pageNum %>'">&nbsp;
 					</td>
 				</tr>
 			</table>
+		</form>
 		</form>
 	</center>
 </body>
