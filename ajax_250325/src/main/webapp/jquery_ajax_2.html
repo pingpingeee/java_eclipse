@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="./js/jquery.js"></script>
+<script>
+	$(function() {
+		$.ajax({
+			url : "js/MOCK_DATA.json",
+			dataType : "json",
+			success : function(data) {
+				if(data.length > 0){
+					var td = $("<table/>");
+					
+					for (var i in data) {
+						var $id = data[i].id;
+						var $first_name = data[i].first_name;
+						var $last_name = data[i].last_name;
+						var $email = data[i].email;
+						var $gender = data[i].gender;
+						
+						var row=$("<tr/>").append(
+								// 열에 id값을 넣음
+								$("<td/>").text($id),		
+								$("<td/>").text($first_name),
+								$("<td/>").text($last_name),
+								$("<td/>").text($email),
+								$("<td/>").text($gender)
+						);
+						// 반복하면서 행의 값들이 table 태그안에 들어감
+						td.append(row);
+					}
+					// 여기서는 td안에 json 값들이 저장됨
+					$(".wrap").append(td);
+				}
+			}
+		//error:function : 생략가능
+		//error:function(){}
+		});
+	});
+</script>
+</head>
+
+<body>
+	<div class="wrap"></div>
+</body>
+</html>
