@@ -169,7 +169,7 @@
       </Context>
       <Context docBase="magicWeb_250319" path="/magicWeb_250319" reloadable="true" source="org.eclipse.jst.jee.server:magicWeb_250319">
             <Resource auth="Container" driverClassName="oracle.jdbc.OracleDriver" maxIdle="30" maxTotal="100" maxWaitMillis="10000" name="jdbc/oracle" password="tiger" type="javax.sql.DataSource" url="jdbc:oracle:thin:@localhost:1521:xe" username="scott"/>
-      </Context><Context docBase="elwork_250325" path="/elwork_250325" reloadable="true" source="org.eclipse.jst.jee.server:elwork_250325"/></Host>
+      </Context><Context docBase="elwork_250325" path="/elwork_250325" reloadable="true" source="org.eclipse.jst.jee.server:elwork_250325"/><Context docBase="jstl_250325" path="/jstl_250325" reloadable="true" source="org.eclipse.jst.jee.server:jstl_250325"/></Host>
     </Engine>
   </Service>
 </Server>
