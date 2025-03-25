@@ -34,7 +34,7 @@
 <body>
 	<center>
 		<h1>글 올 리 기</h1>
-		<form name="reg_frm" method="post" action="write_ok.jsp">
+		<form name="reg_frm" method="post" action="write_ok.jsp" enctype="multipart/form-data">
 			<input type="hidden" name="b_id" value="<%= b_id %>">
 			<input type="hidden" name="b_ref" value="<%= b_ref %>">
 			<input type="hidden" name="b_step" value="<%= b_step %>">
@@ -69,6 +69,12 @@
 							}
 						%>
 					</td>
+				</tr>
+				<tr height="30">
+					<td width="80">파      일</td>
+					<td colspan="3" width="140">
+						<input type="file" name="b_fname" size="40" maxlength="100">
+					</td>						
 				</tr>
 				<tr>
 					<td colspan="4">

@@ -50,6 +50,18 @@
 				</td>
 			</tr>
 			<tr height="30" align="center">
+				<td width="110">파&nbsp;&nbsp;일</td>
+				<td colspan="3">
+					&nbsp;
+				<%
+				out.print("<p>첨부파일: " + 
+				          "<a href='fileDownload.jsp?fileN=" + board.getB_rfname() + "'>" + 
+				          board.getB_rfname() + 
+				          "</a></p>");
+				%>
+				</td>
+			</tr>
+			<tr height="30" align="center">
 				<td width="100">글제목</td>
 				<td width="200" align="left">
 					<%= board.getB_title() %>
